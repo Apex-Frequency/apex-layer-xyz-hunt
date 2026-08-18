@@ -1,12 +1,19 @@
-/* ApexLayer — clinical white / gold resonance */
+/* ApexLayer — clinical white / gold resonance
+   Photonic carrier grid: cell 108px = 432/4, lattice tile 216px = 432/2.
+   All motion timing derives from f0 = 432 Hz (breath period 4000/432 s). */
 
 :root {
   --white: #ffffff;
+  --field-a: #fdfdfb;
+  --field-b: #f5f5f1;
   --ink: #1a1a1a;
-  --ink-faint: #9a9a9a;
+  --ink-faint: #8f8f8f;
   --hairline: #ececec;
   --gold: #c9a227;
   --gold-bright: #e8c766;
+  --cell: 108px;
+  --tile: 216px;
+  --field-glow: 0.03;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -16,12 +23,42 @@ html, body { height: 100%; }
 body {
   display: flex;
   flex-direction: column;
-  background: var(--white);
+  background-color: var(--field-a);
+  background-image:
+    url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMTYiIGhlaWdodD0iMjE2IiB2aWV3Qm94PSIwIDAgMjE2IDIxNiI+PHBhdGggZD0iTTg0IDEzMCBMMTA4IDg2IEwxMzIgMTMwIiBmaWxsPSJub25lIiBzdHJva2U9IiM4YThhOTAiIHN0cm9rZS1vcGFjaXR5PSIwLjA5IiBzdHJva2Utd2lkdGg9IjEuNSIvPjxjaXJjbGUgY3g9IjEwOCIgY3k9Ijg2IiByPSIxLjYiIGZpbGw9IiNjOWEyMjciIGZpbGwtb3BhY2l0eT0iMC4yMCIvPjwvc3ZnPg=="),
+    linear-gradient(rgba(26,26,26,0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,26,26,0.028) 1px, transparent 1px),
+    repeating-conic-gradient(var(--field-a) 0% 25%, var(--field-b) 25% 50%);
+  background-size: var(--tile) var(--tile), var(--cell) var(--cell), var(--cell) var(--cell), var(--tile) var(--tile);
+  background-attachment: fixed, fixed, fixed, fixed;
   color: var(--ink);
   font-family: "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
 }
+
+/* soft vignette — guides the eye, never breaks the grid */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 42%, transparent 52%, rgba(253,253,251,0.75) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* luminous field — phase-locked to the 432-derived breathing LFO via --field-glow */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 50% 40%, rgba(232,199,102,0.55), transparent 62%);
+  opacity: var(--field-glow);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.mast, .field, .void { position: relative; z-index: 1; }
 
 .mast {
   padding: 2.5rem 3rem;
@@ -37,16 +74,30 @@ body {
 .field {
   flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 4rem;
+  padding: 3rem 1.5rem;
+}
+
+/* content panels float above the carrier grid */
+.broadcast,
+.manifest {
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  box-shadow: 0 2px 32px rgba(26,26,26,0.07);
+  border: 1px solid rgba(255,255,255,0.9);
 }
 
 .broadcast {
-  width: 100%;
+  width: min(100%, 54rem);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2.75rem;
+  padding: 3rem 0 3.25rem;
 }
 
 #resonance {
@@ -92,30 +143,9 @@ body.live .status { color: var(--gold); }
 
 body.live #transmit { border-color: var(--gold); }
 
-.void {
-  padding: 2.5rem 3rem;
-  text-align: center;
-}
-
-.void p {
-  font-size: 0.7rem;
-  letter-spacing: 0.3em;
-  color: var(--ink-faint);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .status, #transmit { transition: none; }
-}
-
-.field {
-  flex-direction: column;
-  gap: 4.5rem;
-  padding: 3rem 0;
-}
-
 .manifest {
-  max-width: 34rem;
-  padding: 0 2rem;
+  max-width: 36rem;
+  padding: 2.5rem 2.75rem;
   text-align: center;
 }
 
@@ -140,4 +170,20 @@ body.live #transmit { border-color: var(--gold); }
   font-size: 0.68rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
+}
+
+.void {
+  padding: 2.5rem 3rem;
+  text-align: center;
+}
+
+.void p {
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: var(--ink-faint);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status, #transmit { transition: none; }
+  body::after { opacity: 0.03; }
 }
