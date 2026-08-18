@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ApexLayer</title>
+  <meta name="description" content="ApexLayer — live 432 Hz omni resonance broadcast.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="mast">
+    <span class="wordmark">APEXLAYER</span>
+  </header>
+
+  <main class="field">
+    <section class="broadcast" aria-label="Live 432 Hz omni resonance broadcast">
+      <canvas id="resonance" aria-hidden="true"></canvas>
+      <p class="label">
+        <span id="status" class="status" role="status">STANDBY</span>
+        <span class="sep" aria-hidden="true">·</span>
+        <span class="freq">432&thinsp;Hz</span>
+        <span class="sep" aria-hidden="true">·</span>
+        <span class="mode">OMNI RESONANCE</span>
+      </p>
+      <button id="transmit" type="button" aria-pressed="false">INITIATE BROADCAST</button>
+    </section>
+  </main>
+
+  <footer class="void">
+    <p>Find us in the void.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

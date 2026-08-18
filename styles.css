@@ -1,0 +1,108 @@
+/* ApexLayer — clinical white / gold resonance */
+
+:root {
+  --white: #ffffff;
+  --ink: #1a1a1a;
+  --ink-faint: #9a9a9a;
+  --hairline: #ececec;
+  --gold: #c9a227;
+  --gold-bright: #e8c766;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  color: var(--ink);
+  font-family: "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mast {
+  padding: 2.5rem 3rem;
+}
+
+.wordmark {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.55em;
+  color: var(--ink);
+}
+
+.field {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.broadcast {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.75rem;
+}
+
+#resonance {
+  width: 100%;
+  height: 180px;
+  display: block;
+}
+
+.label {
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+}
+
+.label .sep { margin: 0 0.9em; color: var(--hairline); }
+
+.status { transition: color 1.2s ease; }
+
+body.live .status { color: var(--gold); }
+
+#transmit {
+  appearance: none;
+  background: transparent;
+  border: 1px solid var(--hairline);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.4em;
+  text-indent: 0.4em;
+  padding: 1rem 2.2rem;
+  cursor: pointer;
+  transition: border-color 0.6s ease, color 0.6s ease;
+}
+
+#transmit:hover,
+#transmit:focus-visible {
+  border-color: var(--gold);
+  color: var(--gold);
+  outline: none;
+}
+
+body.live #transmit { border-color: var(--gold); }
+
+.void {
+  padding: 2.5rem 3rem;
+  text-align: center;
+}
+
+.void p {
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: var(--ink-faint);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status, #transmit { transition: none; }
+}
