@@ -106,3 +106,38 @@ body.live #transmit { border-color: var(--gold); }
 @media (prefers-reduced-motion: reduce) {
   .status, #transmit { transition: none; }
 }
+
+.field {
+  flex-direction: column;
+  gap: 4.5rem;
+  padding: 3rem 0;
+}
+
+.manifest {
+  max-width: 34rem;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.manifest h1 {
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  margin-bottom: 1.4rem;
+}
+
+.manifest p {
+  font-size: 0.8rem;
+  font-weight: 300;
+  line-height: 2;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+}
+
+.manifest .quiet {
+  margin-top: 1.4rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
