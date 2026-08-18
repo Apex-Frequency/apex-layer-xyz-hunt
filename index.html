@@ -65,9 +65,11 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html { background-color: var(--void); }
-html, body { height: 100%; }
+html, body { height: 100%; overscroll-behavior: none; }
 
 body {
+  min-height: var(--apex-vh, 100%);
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   display: flex;
   flex-direction: column;
   background-color: var(--void);
@@ -84,6 +86,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* iOS: prevent focus auto-zoom on form controls */
+@supports (-webkit-overflow-scrolling: touch) {
+  input, select, textarea { font-size: 16px !important; }
+}
+
 /* hidden-signal geometry layer — barely there, phase-locked pulse periods */
 .geo {
   position: fixed;
@@ -92,6 +99,9 @@ body {
   pointer-events: none;
   z-index: 0;
   will-change: transform, opacity;
+  transform: translate3d(0,0,0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 .geo-1 { width: 46vmax; height: 46vmax; top: -8vmax; right: -12vmax; opacity: 0.07; animation: geopulse 9.259s ease-in-out infinite alternate; }
 .geo-2 { width: 34vmax; height: 34vmax; bottom: -10vmax; left: -9vmax; opacity: 0.06; animation: geopulse 13.889s ease-in-out infinite alternate-reverse; }
@@ -112,6 +122,9 @@ body {
   inset: 0;
   z-index: 0;
   pointer-events: none;
+  transform: translate3d(0,0,0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* luminous field glow — driven each frame from the same 432/4000 Hz LFO */
@@ -121,6 +134,7 @@ body::after {
   inset: 0;
   background: radial-gradient(circle at 50% 36%, rgba(168,85,247,0.5), transparent 58%);
   opacity: var(--field-glow);
+  mix-blend-mode: screen;
   pointer-events: none;
   z-index: 0;
 }
@@ -387,8 +401,16 @@ body.live .status { color: var(--magenta); }
     cx = (r.left + r.width / 2) * dpr;
     cy = (r.top + r.height / 2) * dpr;
   }
-  window.addEventListener('resize', resize);
+  function lockViewport() {
+    document.documentElement.style.setProperty('--apex-vh', window.innerHeight + 'px');
+  }
+  window.addEventListener('resize', () => { lockViewport(); resize(); });
+  window.addEventListener('orientationchange', () => { lockViewport(); resize(); });
   window.addEventListener('scroll', origin, { passive: true });
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') { lockViewport(); resize(); }
+  });
+  lockViewport();
   resize();
 
   function initAudio() {
