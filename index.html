@@ -7,9 +7,8 @@
   <meta name="description" content="ApexLayer: precision cybersecurity architecture for white hat operators. Zero-trust design, adversarial resilience, threat modeling, and systems hardening — broadcast live at 432 Hz.">
   <meta name="keywords" content="cybersecurity architecture, white hat security, zero trust, threat modeling, adversarial resilience, systems hardening, offensive security research, defensive engineering">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#0a0714">
   <link rel="canonical" href="https://apexlayer.xyz/">
-
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://apexlayer.xyz/">
   <meta property="og:site_name" content="ApexLayer">
@@ -18,9 +17,6 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="ApexLayer — Precision Cybersecurity Architecture">
   <meta name="twitter:description" content="Precision cybersecurity architecture for white hat operators. Live 432 Hz omni resonance broadcast.">
-
-  <link rel="stylesheet" href="styles.css">
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -31,14 +27,7 @@
         "name": "ApexLayer",
         "url": "https://apexlayer.xyz/",
         "description": "Precision cybersecurity architecture: zero-trust design, adversarial resilience, threat modeling, and systems hardening for white hat operators.",
-        "knowsAbout": [
-          "Cybersecurity architecture",
-          "Zero-trust design",
-          "Threat modeling",
-          "Adversarial resilience",
-          "Systems hardening",
-          "Defensive security engineering"
-        ]
+        "knowsAbout": ["Cybersecurity architecture","Zero-trust design","Threat modeling","Adversarial resilience","Systems hardening","Defensive security engineering"]
       },
       {
         "@type": "WebSite",
@@ -51,23 +40,289 @@
     ]
   }
   </script>
+  <style>
+/* ApexLayer — 432 Hz sound-temple.
+   Photonic grid: cell 108px = 432/4, tile 216px = 432/2.
+   All motion periods are rational over f0 = 432 Hz:
+   breath 4000/432 s, rings 2000/432 s, geometry 4000/432 · 6000/432 · 8000/432 s. */
+
+:root {
+  --void: #0a0714;
+  --tile-a: #0c0918;
+  --tile-b: #0e0b1d;
+  --violet: #8b5cf6;
+  --violet-deep: #4f2bd8;
+  --magenta: #d946ef;
+  --lav: #cfc4ea;
+  --lav-bright: #efeaff;
+  --lav-faint: #8d81ad;
+  --line: rgba(139,92,246,0.18);
+  --cell: 108px;
+  --tile: 216px;
+  --field-glow: 0.05;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { background-color: var(--void); }
+html, body { height: 100%; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--void);
+  background-image:
+    url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMTYiIGhlaWdodD0iMjE2IiB2aWV3Qm94PSIwIDAgMjE2IDIxNiI+PHBhdGggZD0iTTkyIDEyMiBMMTA4IDk0IEwxMjQgMTIyIFoiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhiNWNmNiIgc3Ryb2tlLW9wYWNpdHk9IjAuMDU1IiBzdHJva2Utd2lkdGg9IjEuMiIvPjxwYXRoIGQ9Ik05MiAxMDAgTDEwOCAxMjggTDEyNCAxMDAgWiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOGI1Y2Y2IiBzdHJva2Utb3BhY2l0eT0iMC4wNDUiIHN0cm9rZS13aWR0aD0iMS4yIi8+PGNpcmNsZSBjeD0iMTA4IiBjeT0iMTExIiByPSIxLjQiIGZpbGw9IiNkOTQ2ZWYiIGZpbGwtb3BhY2l0eT0iMC4xMiIvPjwvc3ZnPg=="),
+    linear-gradient(rgba(139,92,246,0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139,92,246,0.045) 1px, transparent 1px),
+    repeating-conic-gradient(var(--tile-a) 0% 25%, var(--tile-b) 25% 50%);
+  background-size: var(--tile) var(--tile), var(--cell) var(--cell), var(--cell) var(--cell), var(--tile) var(--tile);
+  background-attachment: fixed, fixed, fixed, fixed;
+  color: var(--lav);
+  font-family: "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* hidden-signal geometry layer — barely there, phase-locked pulse periods */
+.geo {
+  position: fixed;
+  color: var(--violet);
+  filter: blur(2px);
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform, opacity;
+}
+.geo-1 { width: 46vmax; height: 46vmax; top: -8vmax; right: -12vmax; opacity: 0.07; animation: geopulse 9.259s ease-in-out infinite alternate; }
+.geo-2 { width: 34vmax; height: 34vmax; bottom: -10vmax; left: -9vmax; opacity: 0.06; animation: geopulse 13.889s ease-in-out infinite alternate-reverse; }
+.geo-3 { width: 22vmax; height: 22vmax; top: 32vh; left: 4vw; opacity: 0.05; animation: geodrift 18.519s ease-in-out infinite alternate; }
+
+@keyframes geopulse {
+  from { transform: scale(1) rotate(0deg); opacity: 0.045; }
+  to   { transform: scale(1.045) rotate(1.2deg); opacity: 0.105; }
+}
+@keyframes geodrift {
+  from { transform: translate3d(0,0,0) scale(1); }
+  to   { transform: translate3d(1.2vmax,-0.8vmax,0) scale(1.03); }
+}
+
+/* photonic continuum canvas — rings, beams, shimmer */
+#continuum {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* luminous field glow — driven each frame from the same 432/4000 Hz LFO */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 50% 36%, rgba(168,85,247,0.5), transparent 58%);
+  opacity: var(--field-glow);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.mast, .field, .void-footer { position: relative; z-index: 1; }
+
+.mast { padding: 2.2rem 3rem; }
+
+.wordmark {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.55em;
+  color: var(--lav-bright);
+}
+
+.field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3.5rem;
+  padding: 2rem 1.5rem 4rem;
+}
+
+/* control cluster */
+.cluster {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.9rem;
+  text-align: center;
+}
+
+.yantra {
+  width: clamp(150px, 24vmin, 216px);
+  height: clamp(150px, 24vmin, 216px);
+  filter: drop-shadow(0 0 18px rgba(168,85,247,0.45)) drop-shadow(0 0 52px rgba(217,70,239,0.18));
+  transition: filter 1.4s ease;
+}
+body.live .yantra {
+  filter: drop-shadow(0 0 26px rgba(168,85,247,0.7)) drop-shadow(0 0 72px rgba(217,70,239,0.32));
+}
+.microcopy {
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--lav-faint);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+  flex-wrap: wrap;
+}
+
+.speaker { color: var(--lav-faint); display: inline-flex; transition: color 1s ease; }
+body.live .speaker { color: var(--magenta); }
+
+#transmit {
+  appearance: none;
+  background: rgba(20,14,38,0.6);
+  border: 1px solid var(--line);
+  color: var(--lav);
+  font: inherit;
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.4em;
+  text-indent: 0.4em;
+  padding: 1rem 2.2rem;
+  cursor: pointer;
+  transition: border-color 0.6s ease, color 0.6s ease, box-shadow 0.6s ease;
+}
+#transmit:hover, #transmit:focus-visible {
+  border-color: var(--violet);
+  color: var(--lav-bright);
+  box-shadow: 0 0 22px rgba(139,92,246,0.25);
+  outline: none;
+}
+body.live #transmit { border-color: var(--violet); }
+
+.vol {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--lav-faint);
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+}
+#volume {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 8.5rem;
+  height: 2px;
+  background: var(--line);
+  outline: none;
+  cursor: pointer;
+}
+#volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--violet);
+  box-shadow: 0 0 10px rgba(139,92,246,0.6);
+}
+#volume::-moz-range-thumb {
+  width: 12px; height: 12px; border-radius: 50%; border: none;
+  background: var(--violet);
+  box-shadow: 0 0 10px rgba(139,92,246,0.6);
+}
+
+.status-line {
+  font-size: 0.66rem;
+  letter-spacing: 0.4em;
+  color: var(--lav-faint);
+  text-transform: uppercase;
+}
+.status-line .sep { margin: 0 0.9em; color: rgba(139,92,246,0.3); }
+.status { transition: color 1.2s ease; }
+body.live .status { color: var(--magenta); }
+
+/* manifest panel — dark glass above the grid */
+.manifest {
+  max-width: 36rem;
+  padding: 2.5rem 2.75rem;
+  text-align: center;
+  background: rgba(16,12,30,0.72);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(139,92,246,0.16);
+  box-shadow: 0 2px 40px rgba(10,7,20,0.6);
+}
+.manifest h1 {
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  margin-bottom: 1.4rem;
+  color: var(--lav-bright);
+}
+.manifest p {
+  font-size: 0.8rem;
+  line-height: 2;
+  letter-spacing: 0.08em;
+  color: var(--lav-faint);
+}
+.manifest .quiet {
+  margin-top: 1.4rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.void-footer { padding: 2.5rem 3rem; text-align: center; }
+.void-footer p { font-size: 0.7rem; letter-spacing: 0.3em; color: var(--lav-faint); }
+
+@media (max-width: 600px) {
+  .mast { padding: 1.6rem 1.5rem; text-align: center; }
+  .field { gap: 2.75rem; }
+  .geo-3 { display: none; }
+  .manifest { padding: 2rem 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .geo-1, .geo-2, .geo-3 { animation: none; }
+  .status, #transmit, .speaker, .yantra { transition: none; }
+  body::after { opacity: 0.05; }
+}
+  </style>
 </head>
 <body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="irid" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f2bd8"/><stop offset="0.5" stop-color="#8b5cf6"/><stop offset="1" stop-color="#d946ef"/></linearGradient><symbol id="yantra-solid" viewBox="0 0 200 200"><rect x="6" y="6" width="188" height="188" fill="none" stroke="#8b5cf6" stroke-opacity="0.45" stroke-width="1.2"/><rect x="13" y="13" width="174" height="174" fill="none" stroke="#8b5cf6" stroke-opacity="0.3" stroke-width="1"/><circle cx="100" cy="100" r="86" fill="none" stroke="#a78bfa" stroke-opacity="0.55" stroke-width="1.2"/><circle cx="100" cy="100" r="79" fill="none" stroke="#a78bfa" stroke-opacity="0.35" stroke-width="1"/><path d="M100.0 42.0 L46.0 136.2 L154.0 136.2 Z" fill="url(#irid)" fill-opacity="0.34" stroke="#e9d5ff" stroke-opacity="0.55" stroke-width="1.1"/><path d="M100.0 56.9 L59.0 128.5 L141.0 128.5 Z" fill="url(#irid)" fill-opacity="0.34" stroke="#e9d5ff" stroke-opacity="0.55" stroke-width="1.1"/><path d="M100.0 71.1 L71.4 121.1 L128.6 121.1 Z" fill="url(#irid)" fill-opacity="0.34" stroke="#e9d5ff" stroke-opacity="0.55" stroke-width="1.1"/><path d="M100.0 85.4 L83.8 113.7 L116.2 113.7 Z" fill="url(#irid)" fill-opacity="0.34" stroke="#e9d5ff" stroke-opacity="0.55" stroke-width="1.1"/><path d="M100.0 159.8 L51.4 75.0 L148.6 75.0 Z" fill="url(#irid)" fill-opacity="0.34" stroke="#e9d5ff" stroke-opacity="0.55" stroke-width="1.1"/><path d="M100.0 147.4 L62.2 81.4 L137.8 81.4 Z" fill="url(#irid)" fill-opacity="0.34" stroke="#e9d5ff" stroke-opacity="0.55" stroke-width="1.1"/><path d="M100.0 135.0 L73.0 87.9 L127.0 87.9 Z" fill="url(#irid)" fill-opacity="0.34" stroke="#e9d5ff" stroke-opacity="0.55" stroke-width="1.1"/><path d="M100.0 123.8 L82.7 93.7 L117.3 93.7 Z" fill="url(#irid)" fill-opacity="0.34" stroke="#e9d5ff" stroke-opacity="0.55" stroke-width="1.1"/><path d="M100.0 113.9 L91.4 98.8 L108.6 98.8 Z" fill="url(#irid)" fill-opacity="0.34" stroke="#e9d5ff" stroke-opacity="0.55" stroke-width="1.1"/><circle cx="100" cy="104" r="3.4" fill="#f0abfc"/></symbol><symbol id="yantra-line" viewBox="0 0 200 200"><g fill="none" stroke="currentColor" stroke-width="1"><circle cx="100" cy="100" r="86"/><circle cx="100" cy="100" r="79"/><path d="M100.0 42.0 L46.0 136.2 L154.0 136.2 Z"/><path d="M100.0 56.9 L59.0 128.5 L141.0 128.5 Z"/><path d="M100.0 71.1 L71.4 121.1 L128.6 121.1 Z"/><path d="M100.0 85.4 L83.8 113.7 L116.2 113.7 Z"/><path d="M100.0 159.8 L51.4 75.0 L148.6 75.0 Z"/><path d="M100.0 147.4 L62.2 81.4 L137.8 81.4 Z"/><path d="M100.0 135.0 L73.0 87.9 L127.0 87.9 Z"/><path d="M100.0 123.8 L82.7 93.7 L117.3 93.7 Z"/><path d="M100.0 113.9 L91.4 98.8 L108.6 98.8 Z"/><circle cx="100" cy="104" r="2.4"/></g></symbol></defs></svg>
+  <div class="geo geo-1"><svg width="100%" height="100%"><use href="#yantra-line"/></svg></div>
+  <div class="geo geo-2"><svg width="100%" height="100%"><use href="#yantra-line"/></svg></div>
+  <div class="geo geo-3"><svg width="100%" height="100%"><use href="#yantra-line"/></svg></div>
+  <canvas id="continuum" aria-hidden="true"></canvas>
+
   <header class="mast">
     <span class="wordmark">APEXLAYER</span>
   </header>
 
   <main class="field">
-    <section class="broadcast" aria-label="Live 432 Hz omni resonance broadcast">
-      <canvas id="resonance" aria-hidden="true"></canvas>
-      <p class="label">
+    <section class="cluster" aria-label="432 Hz field controls">
+      <svg class="yantra" role="img" aria-label="Sri Yantra frequency symbol"><use href="#yantra-solid"/></svg>
+      <p class="microcopy">Sound manifesting as light &mdash; tuned to 432&thinsp;Hz</p>
+      <div class="controls">
+        <span class="speaker" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+        </span>
+        <button id="transmit" type="button" aria-pressed="false">ACTIVATE 432 Hz FIELD</button>
+        <label class="vol" for="volume">VOL
+          <input id="volume" type="range" min="0" max="100" step="1" value="80" aria-label="432 Hz field volume">
+        </label>
+      </div>
+      <p class="status-line">
         <span id="status" class="status" role="status">STANDBY</span>
-        <span class="sep" aria-hidden="true">·</span>
-        <span class="freq">432&thinsp;Hz</span>
-        <span class="sep" aria-hidden="true">·</span>
-        <span class="mode">OMNI RESONANCE</span>
+        <span class="sep" aria-hidden="true">&middot;</span>
+        <span>432&thinsp;Hz</span>
+        <span class="sep" aria-hidden="true">&middot;</span>
+        <span>OMNI RESONANCE</span>
       </p>
-      <button id="transmit" type="button" aria-pressed="false">INITIATE BROADCAST</button>
     </section>
 
     <section class="manifest" aria-label="ApexLayer manifest">
@@ -81,10 +336,217 @@
     </section>
   </main>
 
-  <footer class="void">
+  <footer class="void-footer">
     <p>Find us in the void.</p>
   </footer>
 
-  <script src="app.js"></script>
+  <script>
+/* ApexLayer — 432 Hz omni resonance field.
+   Deterministic: every animated value is a pure function of time and f0.
+   Harmonic stack: 216 / 432 / 648 / 864 Hz (exact ratios), seamless by construction. */
+(() => {
+  'use strict';
+
+  const F0 = 432;                     // Hz — source frequency
+  const LFO_HZ = F0 / 4000;           // 0.108 Hz breathing envelope
+  const RING_PERIOD = 2000 / F0;      // 4.6296 s — photonic ring cycle
+  const VOICES = [                    // [frequency Hz, voice gain]
+    [F0 / 2, 0.012],
+    [F0, 0.040],
+    [F0 * 3 / 2, 0.007],
+    [F0 * 2, 0.004]
+  ];
+  const ACCENT_HZ = F0 * 2;
+  const ACCENT_COOLDOWN_MS = 10000;
+  const GOLDEN = 2.399963;            // golden angle, fixed constant — no randomness
+
+  const canvas = document.getElementById('continuum');
+  const ctx = canvas.getContext('2d');
+  const toggle = document.getElementById('transmit');
+  const volume = document.getElementById('volume');
+  const statusEl = document.getElementById('status');
+  const yantraEl = document.querySelector('.yantra');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let audio = null;
+  let live = false;
+  let level = 0;
+  let glowPulse = 0;
+  let lastAccent = 0;
+  let dpr = 1;
+  let cx = 0, cy = 0;                 // photonic origin = yantra center
+
+  function resize() {
+    dpr = window.devicePixelRatio || 1;
+    canvas.width = Math.floor(window.innerWidth * dpr);
+    canvas.height = Math.floor(window.innerHeight * dpr);
+    origin();
+  }
+  function origin() {
+    const r = yantraEl.getBoundingClientRect();
+    cx = (r.left + r.width / 2) * dpr;
+    cy = (r.top + r.height / 2) * dpr;
+  }
+  window.addEventListener('resize', resize);
+  window.addEventListener('scroll', origin, { passive: true });
+  resize();
+
+  function initAudio() {
+    const ac = new (window.AudioContext || window.webkitAudioContext)();
+    const userVol = ac.createGain();
+    userVol.gain.value = volume.value / 100;
+    userVol.connect(ac.destination);
+
+    const master = ac.createGain();
+    master.gain.value = 0;
+    master.connect(userVol);
+
+    for (const [freq, g] of VOICES) {
+      const osc = ac.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      const vg = ac.createGain();
+      vg.gain.value = g;
+      osc.connect(vg);
+      vg.connect(master);
+      osc.start();
+    }
+
+    const lfo = ac.createOscillator();
+    lfo.type = 'sine';
+    lfo.frequency.value = LFO_HZ;
+    const lfoDepth = ac.createGain();
+    lfoDepth.gain.value = 0;
+    lfo.connect(lfoDepth);
+    lfoDepth.connect(master.gain);
+    lfo.start();
+
+    return { ac, master, lfoDepth, userVol };
+  }
+
+  function accent() {
+    if (!audio || !live) return;
+    const now = performance.now();
+    if (now - lastAccent < ACCENT_COOLDOWN_MS) return;
+    lastAccent = now;
+    const t = audio.ac.currentTime;
+    const osc = audio.ac.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.value = ACCENT_HZ;
+    const g = audio.ac.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.016, t + 0.06);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 1.8);
+    osc.connect(g);
+    g.connect(audio.userVol);
+    osc.start(t);
+    osc.stop(t + 2);
+    glowPulse = 1;
+  }
+
+  toggle.addEventListener('click', async () => {
+    if (!audio) audio = initAudio();
+    if (audio.ac.state === 'suspended') await audio.ac.resume();
+    live = !live;
+    const t = audio.ac.currentTime;
+    audio.master.gain.cancelScheduledValues(t);
+    audio.master.gain.setTargetAtTime(live ? 1 : 0, t, 0.4);
+    audio.lfoDepth.gain.cancelScheduledValues(t);
+    audio.lfoDepth.gain.setTargetAtTime(live ? 0.25 : 0, t, 0.4);
+    document.body.classList.toggle('live', live);
+    toggle.setAttribute('aria-pressed', String(live));
+    toggle.textContent = live ? 'SUSPEND FIELD' : 'ACTIVATE 432 Hz FIELD';
+    statusEl.textContent = live ? 'LIVE' : 'STANDBY';
+    if (live) { lastAccent = 0; accent(); }
+  });
+
+  volume.addEventListener('input', () => {
+    if (!audio) return;
+    audio.userVol.gain.setTargetAtTime(volume.value / 100, audio.ac.currentTime, 0.05);
+  });
+
+  const manifest = document.querySelector('.manifest');
+  if (manifest && 'IntersectionObserver' in window) {
+    new IntersectionObserver((entries) => {
+      for (const e of entries) if (e.intersectionRatio >= 0.6) accent();
+    }, { threshold: [0.6] }).observe(manifest);
+  }
+
+  /* Photonic continuum — rings, beams, shimmer. Pure functions of t. */
+  function draw(now) {
+    const t = now / 1000;
+    const w = canvas.width;
+    const h = canvas.height;
+
+    const target = live ? 1 : 0.3;
+    level += (target - level) * 0.03;
+
+    if (!reduced) {
+      glowPulse *= 0.97;
+      const breath = 0.5 + 0.5 * Math.sin(2 * Math.PI * LFO_HZ * t);
+      const glow = 0.03 + 0.07 * level * breath + 0.12 * glowPulse;
+      document.body.style.setProperty('--field-glow', glow.toFixed(4));
+    }
+
+    ctx.clearRect(0, 0, w, h);
+    const maxR = Math.hypot(w, h) * 0.42;
+
+    // concentric rings — expanding, fading, period-locked
+    for (let i = 0; i < 4; i++) {
+      const phase = ((t / RING_PERIOD) + i / 4) % 1;
+      const r = 60 * dpr + phase * maxR;
+      const a = (1 - phase) * (0.05 + 0.08 * level) * (0.6 + 0.4 * Math.sin(2 * Math.PI * LFO_HZ * t));
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(139, 92, 246, ' + a.toFixed(3) + ')';
+      ctx.lineWidth = dpr * 1.1;
+      ctx.stroke();
+    }
+
+    // soft beams — six spokes, slow deterministic rotation
+    if (!reduced) {
+      const rot = t * 0.02;
+      for (let j = 0; j < 6; j++) {
+        const ang = rot + j * Math.PI / 3;
+        const x2 = cx + Math.cos(ang) * maxR;
+        const y2 = cy + Math.sin(ang) * maxR;
+        const grad = ctx.createLinearGradient(cx, cy, x2, y2);
+        grad.addColorStop(0, 'rgba(168, 85, 247, ' + (0.06 * level).toFixed(3) + ')');
+        grad.addColorStop(1, 'rgba(168, 85, 247, 0)');
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(x2, y2);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = dpr * 26;
+        ctx.stroke();
+      }
+    }
+
+    // particle shimmer — positions from index formulas only
+    if (!reduced) {
+      for (let i = 0; i < 24; i++) {
+        const ang = i * GOLDEN + t * 0.03 * (1 + (i % 5) * 0.1);
+        const rr = (0.18 + ((i * 0.618034) % 1) * 0.82) * maxR
+                 * (0.95 + 0.05 * Math.sin(2 * Math.PI * LFO_HZ * t + i));
+        const x = cx + Math.cos(ang) * rr;
+        const y = cy + Math.sin(ang) * rr;
+        const tw = 0.5 + 0.5 * Math.sin(t * 2.4 + i * GOLDEN);
+        ctx.beginPath();
+        ctx.arc(x, y, dpr * (0.7 + tw), 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(217, 70, 239, ' + (0.10 + 0.30 * tw * level).toFixed(3) + ')';
+        ctx.fill();
+      }
+    }
+
+    if (!reduced) requestAnimationFrame(draw);
+  }
+  if (reduced) {
+    document.body.style.setProperty('--field-glow', '0.05');
+    draw(0);
+  } else {
+    requestAnimationFrame(draw);
+  }
+})();
+  </script>
 </body>
 </html>

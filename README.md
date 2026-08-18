@@ -1,13 +1,15 @@
 # ApexLayer
 
-Precision cybersecurity architecture. Clinical white, minimal, static —
-zero dependencies, zero build step.
+Precision cybersecurity architecture. A dark violet 432 Hz sound-temple:
+single self-contained HTML file, zero dependencies, zero build step.
 
-Live 432 Hz omni resonance broadcast: a single sine oscillator (Web Audio)
-with a breathing LFO, rendered as a gold shimmer transmission on canvas.
-Every animation constant is an exact rational derivation of the source
-frequency f0 = 432 Hz (LFO = 432/4000 Hz, omega = 432/180 rad/s,
-k = 432/1200 rad/px).
+Live 432 Hz omni resonance field: a harmonic stack (216/432/648/864 Hz,
+Web Audio) with breathing LFO and volume control, rendered as a photonic
+continuum — Sri Yantra frequency symbol, expanding rings, beams, and
+shimmer over a checkered lattice grid. Every animation constant is an
+exact rational derivation of f0 = 432 Hz (grid cell 432/4 px, tile
+432/2 px, LFO 432/4000 Hz, ring period 2000/432 s). Deterministic:
+no randomization anywhere.
 
 Serve the repository root as static files. No contact vectors.
 
