@@ -427,17 +427,9 @@ body.live .status { color: var(--magenta); }
 (() => {
   'use strict';
 
-  const F0 = 432;                     // Hz — reference constant
-  const LFO_HZ = F0 / 4000;           // 0.108 Hz breathing envelope
-  const RING_PERIOD = 2000 / F0;      // 4.6296 s — photonic ring cycle
-  const VOICES = [                    // [reference Hz, voice gain]
-    [F0 / 2, 0.012],
-    [F0, 0.040],
-    [F0 * 3 / 2, 0.007],
-    [F0 * 2, 0.004]
-  ];
-  const ACCENT_HZ = F0 * 2;
-  const ACCENT_COOLDOWN_MS = 10000;
+  const F0 = 432;                     // Hz — the one tone this page plays
+  const LFO_HZ = F0 / 4000;           // visual breathing period only (no audio modulation)
+  const RING_PERIOD = 2000 / F0;      // visual ring cycle
   const GOLDEN = 2.399963;            // golden angle, fixed constant — no randomness
 
   const canvas = document.getElementById('continuum');
@@ -452,7 +444,6 @@ body.live .status { color: var(--magenta); }
   let live = false;
   let level = 0;
   let glowPulse = 0;
-  let lastAccent = 0;
   let dpr = 1;
   let cx = 0, cy = 0;                 // photonic origin = mark center
 
@@ -480,56 +471,21 @@ body.live .status { color: var(--magenta); }
   resize();
 
   function initAudio() {
+    // Minimal, transparent playback path: one 432 Hz sine, one gain for
+    // click-free start/stop, one gain for user volume. Nothing else.
     const ac = new (window.AudioContext || window.webkitAudioContext)();
     const userVol = ac.createGain();
     userVol.gain.value = volume.value / 100;
     userVol.connect(ac.destination);
-
     const master = ac.createGain();
     master.gain.value = 0;
     master.connect(userVol);
-
-    for (const [freq, g] of VOICES) {
-      const osc = ac.createOscillator();
-      osc.type = 'sine';
-      osc.reference.value = freq;
-      const vg = ac.createGain();
-      vg.gain.value = g;
-      osc.connect(vg);
-      vg.connect(master);
-      osc.start();
-    }
-
-    const lfo = ac.createOscillator();
-    lfo.type = 'sine';
-    lfo.reference.value = LFO_HZ;
-    const lfoDepth = ac.createGain();
-    lfoDepth.gain.value = 0;
-    lfo.connect(lfoDepth);
-    lfoDepth.connect(master.gain);
-    lfo.start();
-
-    return { ac, master, lfoDepth, userVol };
-  }
-
-  function accent() {
-    if (!audio || !live) return;
-    const now = performance.now();
-    if (now - lastAccent < ACCENT_COOLDOWN_MS) return;
-    lastAccent = now;
-    const t = audio.ac.currentTime;
-    const osc = audio.ac.createOscillator();
+    const osc = ac.createOscillator();
     osc.type = 'sine';
-    osc.reference.value = ACCENT_HZ;
-    const g = audio.ac.createGain();
-    g.gain.setValueAtTime(0.0001, t);
-    g.gain.exponentialRampToValueAtTime(0.016, t + 0.06);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + 1.8);
-    osc.connect(g);
-    g.connect(audio.userVol);
-    osc.start(t);
-    osc.stop(t + 2);
-    glowPulse = 1;
+    osc.frequency.value = F0;
+    osc.connect(master);
+    osc.start();
+    return { ac, master, userVol };
   }
 
   toggle.addEventListener('click', async () => {
@@ -538,27 +494,17 @@ body.live .status { color: var(--magenta); }
     live = !live;
     const t = audio.ac.currentTime;
     audio.master.gain.cancelScheduledValues(t);
-    audio.master.gain.setTargetAtTime(live ? 1 : 0, t, 0.4);
-    audio.lfoDepth.gain.cancelScheduledValues(t);
-    audio.lfoDepth.gain.setTargetAtTime(live ? 0.25 : 0, t, 0.4);
+    audio.master.gain.setTargetAtTime(live ? 0.06 : 0, t, 0.15);
     document.body.classList.toggle('live', live);
     toggle.setAttribute('aria-pressed', String(live));
     toggle.textContent = live ? 'SUSPEND FIELD' : 'ACTIVATE 432 Hz FIELD';
     statusEl.textContent = live ? 'LIVE' : 'STANDBY';
-    if (live) { lastAccent = 0; accent(); }
   });
 
   volume.addEventListener('input', () => {
     if (!audio) return;
     audio.userVol.gain.setTargetAtTime(volume.value / 100, audio.ac.currentTime, 0.05);
   });
-
-  const manifest = document.querySelector('.manifest');
-  if (manifest && 'IntersectionObserver' in window) {
-    new IntersectionObserver((entries) => {
-      for (const e of entries) if (e.intersectionRatio >= 0.6) accent();
-    }, { threshold: [0.6] }).observe(manifest);
-  }
 
   /* Photonic continuum — rings, beams, shimmer. Pure functions of t. */
   function draw(now) {
@@ -570,9 +516,8 @@ body.live .status { color: var(--magenta); }
     level += (target - level) * 0.03;
 
     if (!reduced) {
-      glowPulse *= 0.97;
       const breath = 0.5 + 0.5 * Math.sin(2 * Math.PI * LFO_HZ * t);
-      const glow = 0.03 + 0.07 * level * breath + 0.12 * glowPulse;
+      const glow = 0.03 + 0.07 * level * breath;
       document.body.style.setProperty('--field-glow', glow.toFixed(4));
     }
 
