@@ -148,6 +148,38 @@ body::after {
   color: var(--lav-bright);
 }
 
+/* 432 Hz micro-shiver — period 0.432s = 432/1000 exactly; sub-pixel, axis-neutral */
+.cluster .wordmark {
+  will-change: transform, text-shadow;
+  backface-visibility: hidden;
+  animation: shiver432 0.432s linear infinite;
+}
+@keyframes shiver432 {
+  0% {
+    transform: translate3d(0, 0, 0);
+    text-shadow: 0 0 4px rgba(196,168,255,0.5), 0 0 10px rgba(168,85,247,0.7);
+  }
+  12.5% { transform: translate3d(0.15px, -0.25px, 0); }
+  25%   { transform: translate3d(-0.2px, 0.2px, 0); }
+  37.5% { transform: translate3d(0.25px, 0.1px, 0); }
+  50% {
+    transform: translate3d(-0.15px, -0.2px, 0);
+    text-shadow: 0 0 6px rgba(214,190,255,0.65), 0 0 14px rgba(217,70,239,0.75);
+  }
+  62.5% { transform: translate3d(0.2px, 0.2px, 0); }
+  75%   { transform: translate3d(-0.25px, -0.1px, 0); }
+  87.5% { transform: translate3d(0.1px, 0.25px, 0); }
+  100% {
+    transform: translate3d(0, 0, 0);
+    text-shadow: 0 0 4px rgba(196,168,255,0.5), 0 0 10px rgba(168,85,247,0.7);
+  }
+}
+
+/* subtitle echo — static glow, no repaint cost */
+.cluster .microcopy {
+  text-shadow: 0 0 2px rgba(196,168,255,0.3), 0 0 6px rgba(168,85,247,0.5);
+}
+
 .field {
   flex: 1;
   display: flex;
@@ -317,6 +349,7 @@ body.live .status { color: var(--magenta); }
 
 @media (prefers-reduced-motion: reduce) {
   .geo-1, .geo-2, .geo-3, .breath { animation: none !important; }
+  .cluster .wordmark { animation: none !important; transform: none !important; }
   .status, #transmit, .speaker, .yantra { transition: none; }
   body::after { opacity: 0.05; }
 }
