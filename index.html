@@ -20,10 +20,10 @@
   <meta property="og:url" content="https://apexlayer.xyz/">
   <meta property="og:site_name" content="ApexLayer">
   <meta property="og:title" content="ApexLayer — Precision Cybersecurity Architecture">
-  <meta property="og:description" content="Zero-trust design, adversarial resilience, threat modeling, systems hardening. Live 432 Hz omni resonance broadcast. Find us in the void.">
+  <meta property="og:description" content="Zero-trust design, adversarial resilience, threat modeling, systems hardening. Live 432 Hz omni coherence broadcast. Find us in the void.">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="ApexLayer — Precision Cybersecurity Architecture">
-  <meta name="twitter:description" content="Precision cybersecurity architecture for white hat operators. Live 432 Hz omni resonance broadcast.">
+  <meta name="twitter:description" content="Precision cybersecurity architecture for white hat operators. Live 432 Hz omni coherence broadcast.">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -51,7 +51,7 @@
 /* ApexLayer — 432 Hz sound-temple.
    Photonic grid: cell 108px = 432/4, tile 216px = 432/2.
    All motion periods are rational over f0 = 432 Hz:
-   breath 4000/432 s, rings 2000/432 s, geometry 4000/432 · 6000/432 · 8000/432 s. */
+   breath 4000/432 s, rings 2000/432 s, topology 4000/432 · 6000/432 · 8000/432 s. */
 
 :root {
   --void: #0a0714;
@@ -98,8 +98,8 @@ body {
   input, select, textarea { font-size: 16px !important; }
 }
 
-/* hidden-signal geometry layer — barely there, phase-locked pulse periods */
-.geo {
+/* hidden-signal topology layer — barely there, phase-locked pulse periods */
+.veil {
   position: fixed;
   color: var(--violet);
   filter: blur(2px);
@@ -110,15 +110,15 @@ body {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
-.geo-1 { width: 46vmax; height: 46vmax; top: -8vmax; right: -12vmax; opacity: 0.07; animation: geopulse 9.259s ease-in-out infinite alternate; }
-.geo-2 { width: 34vmax; height: 34vmax; bottom: -10vmax; left: -9vmax; opacity: 0.06; animation: geopulse 13.889s ease-in-out infinite alternate-reverse; }
-.geo-3 { width: 22vmax; height: 22vmax; top: 32vh; left: 4vw; opacity: 0.05; animation: geodrift 18.519s ease-in-out infinite alternate; }
+.veil-1 { width: 46vmax; height: 46vmax; top: -8vmax; right: -12vmax; opacity: 0.07; animation: veilpulse 9.259s ease-in-out infinite alternate; }
+.veil-2 { width: 34vmax; height: 34vmax; bottom: -10vmax; left: -9vmax; opacity: 0.06; animation: veilpulse 13.889s ease-in-out infinite alternate-reverse; }
+.veil-3 { width: 22vmax; height: 22vmax; top: 32vh; left: 4vw; opacity: 0.05; animation: veildrift 18.519s ease-in-out infinite alternate; }
 
-@keyframes geopulse {
+@keyframes veilpulse {
   from { transform: scale(1) rotate(0deg); opacity: 0.045; }
   to   { transform: scale(1.045) rotate(1.2deg); opacity: 0.105; }
 }
-@keyframes geodrift {
+@keyframes veildrift {
   from { transform: translate3d(0,0,0) scale(1); }
   to   { transform: translate3d(1.2vmax,-0.8vmax,0) scale(1.03); }
 }
@@ -353,12 +353,12 @@ body.live .status { color: var(--magenta); }
 
 @media (max-width: 600px) {
   .field { gap: 2.75rem; }
-  .geo-3 { display: none; }
+  .veil-3 { display: none; }
   .manifest { padding: 2rem 1.5rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .geo-1, .geo-2, .geo-3, .breath { animation: none !important; }
+  .veil-1, .veil-2, .veil-3, .breath { animation: none !important; }
   .cluster .wordmark { animation: none !important; transform: none !important; }
   .status, #transmit, .speaker, .yantra { transition: none; }
   body::after { opacity: 0.05; }
@@ -367,9 +367,9 @@ body.live .status { color: var(--magenta); }
 </head>
 <body>
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="irid" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f2bd8"/><stop offset="0.5" stop-color="#8b5cf6"/><stop offset="1" stop-color="#d946ef"/></linearGradient><symbol id="yantra-line" viewBox="0 0 200 200"><g fill="none" stroke="currentColor" stroke-width="1"><circle cx="100" cy="100" r="86"/><circle cx="100" cy="100" r="79"/><path d="M100.0 42.0 L46.0 136.2 L154.0 136.2 Z"/><path d="M100.0 56.9 L59.0 128.5 L141.0 128.5 Z"/><path d="M100.0 71.1 L71.4 121.1 L128.6 121.1 Z"/><path d="M100.0 85.4 L83.8 113.7 L116.2 113.7 Z"/><path d="M100.0 159.8 L51.4 75.0 L148.6 75.0 Z"/><path d="M100.0 147.4 L62.2 81.4 L137.8 81.4 Z"/><path d="M100.0 135.0 L73.0 87.9 L127.0 87.9 Z"/><path d="M100.0 123.8 L82.7 93.7 L117.3 93.7 Z"/><path d="M100.0 113.9 L91.4 98.8 L108.6 98.8 Z"/><circle cx="100" cy="104" r="2.4"/></g></symbol></defs></svg>
-  <div class="geo geo-1"><svg width="100%" height="100%"><use href="#yantra-line"/></svg></div>
-  <div class="geo geo-2"><svg width="100%" height="100%"><use href="#yantra-line"/></svg></div>
-  <div class="geo geo-3"><svg width="100%" height="100%"><use href="#yantra-line"/></svg></div>
+  <div class="veil veil-1"><svg width="100%" height="100%"><use href="#yantra-line"/></svg></div>
+  <div class="veil veil-2"><svg width="100%" height="100%"><use href="#yantra-line"/></svg></div>
+  <div class="veil veil-3"><svg width="100%" height="100%"><use href="#yantra-line"/></svg></div>
   <canvas id="continuum" aria-hidden="true"></canvas>
 
   <main class="field">
@@ -391,7 +391,7 @@ body.live .status { color: var(--magenta); }
         <span class="sep" aria-hidden="true">&middot;</span>
         <span>432&thinsp;Hz</span>
         <span class="sep" aria-hidden="true">&middot;</span>
-        <span>OMNI RESONANCE</span>
+        <span>OMNI COHERENCE</span>
       </p>
     </section>
 
@@ -402,7 +402,7 @@ body.live .status { color: var(--magenta); }
         boundary. Systems hardening for those who defend what matters.
         White hat, by discipline and by definition.
       </p>
-      <p class="quiet">We do not advertise. We resonate.</p>
+      <p class="quiet">We do not advertise. We synchronize.</p>
     </section>
 
     <section class="manifest" aria-label="Transmissions">
@@ -421,7 +421,7 @@ body.live .status { color: var(--magenta); }
   </footer>
 
   <script>
-/* ApexLayer — 432 Hz omni resonance field.
+/* ApexLayer — 432 Hz omni coherence field.
    Deterministic: every animated value is a pure function of time and f0.
    Harmonic stack: 216 / 432 / 648 / 864 Hz (exact ratios), seamless by construction. */
 (() => {

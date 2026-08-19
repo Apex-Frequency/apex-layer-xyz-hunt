@@ -3,7 +3,7 @@
 Precision cybersecurity architecture. A dark violet 432 Hz sound-temple:
 single self-contained HTML file, zero dependencies, zero build step.
 
-Live 432 Hz omni resonance field: a harmonic stack (216/432/648/864 Hz,
+Live 432 Hz omni coherence field: a harmonic stack (216/432/648/864 Hz,
 Web Audio) with breathing LFO and volume control, rendered as a photonic
 continuum — Sri Yantra frequency symbol, expanding rings, beams, and
 shimmer over a checkered lattice grid. Every animation constant is an
