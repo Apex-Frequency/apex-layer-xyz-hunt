@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Detection Engineering Is Instrument Building — ApexLayer</title>
+  <meta name="description" content="Detections as engineered artifacts: versioned as code, tested against known signals, measured by precision — not accumulated as vendor defaults.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0714">
+  <link rel="canonical" href="https://apexlayer.xyz/transmissions/detection-engineering-is-instrument-building.html">
+  <link rel="icon" href="/icons/yantra.svg?v=1" type="image/svg+xml">
+  <link rel="shortcut icon" href="/favicon.ico?v=1">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://apexlayer.xyz/transmissions/detection-engineering-is-instrument-building.html">
+  <meta property="og:site_name" content="ApexLayer">
+  <meta property="og:title" content="Detection Engineering Is Instrument Building — ApexLayer">
+  <meta property="og:description" content="Detections as engineered artifacts: versioned as code, tested against known signals, measured by precision — not accumulated as vendor defaults.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Detection Engineering Is Instrument Building",
+    "description": "Detections as engineered artifacts: versioned as code, tested against known signals, measured by precision — not accumulated as vendor defaults.",
+    "url": "https://apexlayer.xyz/transmissions/detection-engineering-is-instrument-building.html",
+    "datePublished": "2026-08-19",
+    "inLanguage": "en",
+    "isPartOf": { "@id": "https://apexlayer.xyz/#site" },
+    "publisher": { "@id": "https://apexlayer.xyz/#org" }
+  }
+  </script>
+  <style>
+:root{--void:#0a0714;--tile-a:#0c0918;--tile-b:#0e0b1d;--violet:#8b5cf6;--magenta:#d946ef;
+--lav:#cfc4ea;--lav-bright:#efeaff;--lav-faint:#8d81ad;--line:rgba(139,92,246,0.18);}
+*{margin:0;padding:0;box-sizing:border-box}
+html{background:var(--void)}
+body{min-height:100vh;background-color:var(--void);
+background-image:linear-gradient(rgba(139,92,246,0.045) 1px,transparent 1px),
+linear-gradient(90deg,rgba(139,92,246,0.045) 1px,transparent 1px),
+repeating-conic-gradient(var(--tile-a) 0% 25%,var(--tile-b) 25% 50%);
+background-size:108px 108px,108px 108px,216px 216px;background-attachment:fixed;
+color:var(--lav);font-family:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;font-weight:300;
+-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;align-items:center;padding:2.5rem 1.5rem}
+.wordmark{font-size:0.8rem;font-weight:400;letter-spacing:0.55em;color:var(--lav-bright);text-decoration:none;margin-bottom:3rem}
+main{max-width:44rem;width:100%;background:rgba(16,12,30,0.78);border:1px solid var(--line);
+box-shadow:0 2px 40px rgba(10,7,20,0.6);padding:3rem clamp(1.5rem,5vw,3.5rem)}
+.kicker{font-size:0.62rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--magenta);margin-bottom:1.2rem}
+h1{font-size:1.35rem;font-weight:400;letter-spacing:0.12em;color:var(--lav-bright);line-height:1.6;margin-bottom:1.8rem}
+h2{font-size:0.85rem;font-weight:400;letter-spacing:0.28em;text-transform:uppercase;color:var(--lav-bright);margin:2.4rem 0 1rem}
+p{font-size:0.86rem;line-height:2;letter-spacing:0.04em;color:var(--lav);margin-bottom:1.1rem}
+p.dim{color:var(--lav-faint)}
+a{color:var(--violet);text-decoration:none;border-bottom:1px solid rgba(139,92,246,0.35)}
+a:hover{color:var(--magenta);border-color:var(--magenta)}
+ul{margin:0 0 1.1rem 1.2rem}
+li{font-size:0.86rem;line-height:2;letter-spacing:0.04em;margin-bottom:0.3rem}
+.related{margin-top:2.6rem;padding-top:1.6rem;border-top:1px solid var(--line)}
+.related p{font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--lav-faint)}
+footer{padding:2.5rem 0 1rem;text-align:center}
+footer p{font-size:0.7rem;letter-spacing:0.3em;color:var(--lav-faint)}
+.tlist{list-style:none;margin:0}
+.tlist li{margin-bottom:1.6rem}
+.tlist a{font-size:0.9rem;letter-spacing:0.1em;border:none;color:var(--lav-bright)}
+.tlist a:hover{color:var(--magenta)}
+.tlist span{display:block;font-size:0.78rem;line-height:1.9;color:var(--lav-faint);margin-top:0.3rem}
+</style>
+</head>
+<body>
+  <a class="wordmark" href="/">APEXLAYER</a>
+  <main>
+    <p class="kicker">Transmission 09 &middot; Detection Engineering</p>
+    <h1>Detection Engineering Is Instrument Building</h1>
+    <p>A detection is not a rule you turn on. It is an instrument you build: designed for a specific signal, calibrated against known inputs, versioned, tested, and retired when it no longer sounds true. Most SOCs do not have a detection engineering practice &mdash; they have an accumulation of vendor defaults nobody has ever heard ring.</p>
+    <h2>Detections as code</h2>
+    <ul>
+      <li>Every detection lives in version control with an owner, a stated hypothesis, and the attack technique it targets (map to MITRE ATT&amp;CK explicitly).</li>
+      <li>Changes go through review like any other code &mdash; a detection modified silently is an instrument detuned silently.</li>
+      <li>Deployment is reproducible: the same rule set, deployed twice, yields the same coverage. Idempotence is not bureaucracy; it is how you know what you are actually running.</li>
+    </ul>
+    <h2>Test against known signals</h2>
+    <p>An instrument is calibrated by playing a known note through it. Atomic red-team tests, replayed attack telemetry, and purple-team exercises are the tuning forks: if the detection does not fire against the technique it claims to catch, it is decoration. Schedule calibration; coverage claims without replay evidence are folklore.</p>
+    <h2>Measure like an engineer</h2>
+    <p>Per detection: true-positive rate, time-to-fire, and analyst cost per alert. Portfolio-wide: technique coverage against your actual threat model, not against the longest possible list. This is <a href="/transmissions/signal-integrity-is-the-whole-job.html">signal integrity</a> made operational &mdash; and the metrics that matter roll up into <a href="/transmissions/soc-metrics-that-measure-resonance.html">measures of resonance</a>, not counts of noise.</p>
+    <p class="dim">Build fewer instruments. Tune every one. We resonate.</p>
+<div class="related"><p>Adjacent transmissions</p><p style="margin-top:0.6rem"><a href="/transmissions/signal-integrity-is-the-whole-job.html">Signal Integrity Is the Whole Job</a> &middot; <a href="/transmissions/soc-metrics-that-measure-resonance.html">SOC Metrics That Measure Resonance</a> &middot; <a href="/">Return to the field</a></p></div>
+  </main>
+  <footer><p>Find us in the void.</p></footer>
+</body>
+</html>
