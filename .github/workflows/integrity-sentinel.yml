@@ -1,0 +1,71 @@
+# Integrity Sentinel — Gold Circuit fail-safe (T1L5 charter, item d)
+#
+# Recomputes the corpus manifest on every push and daily, and compares it
+# against the committed integrity/manifest.json. Any delta that arrives
+# without its matching manifest update is an UNAUTHORIZED MUTATION:
+# the run fails loudly and opens an alarm issue carrying the per-file diff.
+#
+# Authorized changes update integrity/manifest.json in the same commit,
+# so the sentinel never fights legitimate work.
+#
+# Rollback (deliberately human-triggered, not automated — an auto-reverting
+# bot with write access would itself be attack surface):
+#   git revert <unauthorized-commit>   # or
+#   git checkout <last-good-sha> -- . && git commit
+name: integrity-sentinel
+on:
+  push:
+  schedule:
+    - cron: "17 5 * * *"
+permissions:
+  issues: write
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Recompute and compare manifest
+        id: check
+        run: |
+          python3 - << 'PYEOF'
+          import hashlib, json, subprocess, sys, re, glob
+          files = sorted(subprocess.run(["git","ls-files"],capture_output=True,text=True).stdout.split())
+          files = [f for f in files if f != "integrity/manifest.json"]
+          current = {f: hashlib.sha256(open(f,"rb").read()).hexdigest() for f in files}
+          idg = hashlib.sha256()
+          for p in sorted(glob.glob("*.html")+glob.glob("transmissions/*.html")):
+              h = open(p, encoding="utf-8").read()
+              for pat in [r"<title>[^<]*</title>", r'name="description" content="[^"]*"', r'rel="canonical" href="[^"]*"']:
+                  m = re.search(pat, h)
+                  if m: idg.update(m.group(0).encode())
+              idg.update(p.encode())
+          committed = json.load(open("integrity/manifest.json"))
+          drift = []
+          for f, h in current.items():
+              if committed["files"].get(f) != h: drift.append(f"MODIFIED-OR-NEW: {f}")
+          for f in committed["files"]:
+              if f not in current: drift.append(f"DELETED: {f}")
+          if committed["identity_fingerprint"] != idg.hexdigest():
+              drift.append("IDENTITY FINGERPRINT CHANGED (titles/descriptions/canonicals/slugs)")
+          if drift:
+              open("drift.txt","w").write("\n".join(drift))
+              print("UNAUTHORIZED MUTATION DETECTED:"); print("\n".join(drift))
+              sys.exit(1)
+          print("SENTINEL: corpus matches committed manifest — zero variance")
+          PYEOF
+      - name: Raise alarm issue
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const drift = fs.existsSync('drift.txt') ? fs.readFileSync('drift.txt','utf8') : '(diff unavailable)';
+            await github.rest.issues.create({
+              owner: context.repo.owner, repo: context.repo.repo,
+              title: 'INTEGRITY SENTINEL ALARM: unauthorized mutation detected',
+              body: 'The deployed corpus no longer matches integrity/manifest.json.\n\n```\n' + drift +
+                    '\n```\nCommit: ' + context.sha +
+                    '\n\nRollback: `git revert ' + context.sha + '` or restore from the last verified state.',
+              labels: []
+            });

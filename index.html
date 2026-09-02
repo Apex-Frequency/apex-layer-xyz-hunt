@@ -16,6 +16,7 @@
   <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=1" sizes="180x180">
   <link rel="mask-icon" href="/icons/mark-mask.svg?v=1" color="#8b5cf6">
   <link rel="manifest" href="/site.webmanifest?v=1">
+  <meta name="apex-s1" content="QVBFWCBQQVJJVFkgTE9DSyAvLyBTVEFHRSAxIE9GIDUuIFlvdSBmb3VuZCB0aGUgY2Fycmllci4gU3VibWl0IHRoaXMgYWNjZXNzIGtleSBleGFjdGx5OiBQSEFTRUxPQ0stSU5JVC00MzI=">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://apexlayer.xyz/">
   <meta property="og:site_name" content="Apex Layer">
@@ -370,6 +371,49 @@ body.live .status { color: var(--magenta); }
   .status, #transmit, .speaker, .apexmark { transition: none; }
   body::after { opacity: 0.05; }
 }
+
+/* White Hat Parity Lock — additive subsystem */
+.parity { width: min(100%, 34rem); text-align: center; }
+.plock-line { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--lav-faint); }
+.plock-line .sep2 { margin: 0 0.7em; color: rgba(139,92,246,0.3); }
+.linklike { appearance: none; background: none; border: none; padding: 0; font: inherit;
+  font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer;
+  color: var(--violet); border-bottom: 1px solid rgba(139,92,246,0.35); }
+.linklike:hover, .linklike:focus-visible { color: var(--magenta); border-color: var(--magenta); outline: none; }
+#plock-panel { margin-top: 1.6rem; padding: 1.8rem 1.6rem; text-align: left;
+  background: rgba(16,12,30,0.78); border: 1px solid var(--line); }
+#plock-panel h2 { font-size: 0.72rem; font-weight: 400; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--lav-bright); margin-bottom: 1rem; }
+#plock-panel p { font-size: 0.74rem; line-height: 1.9; letter-spacing: 0.04em;
+  color: var(--lav-faint); margin-bottom: 0.9rem; }
+#plock-panel p strong { color: var(--lav); font-weight: 400; }
+.stage { border-top: 1px solid var(--line); padding-top: 1rem; margin-top: 1rem; }
+.stage p code { color: var(--lav); font-size: 0.74em; letter-spacing: 0.06em; }
+.stage-row { display: flex; gap: 0.6rem; }
+.stage-row input { flex: 1; background: rgba(10,7,20,0.8); border: 1px solid var(--line);
+  color: var(--lav-bright); font: inherit; font-size: 0.74rem; letter-spacing: 0.08em;
+  padding: 0.55rem 0.7rem; }
+.stage-row input:focus { border-color: var(--violet); outline: none; }
+.stage-row button { appearance: none; background: rgba(20,14,38,0.6); border: 1px solid var(--line);
+  color: var(--lav); font: inherit; font-size: 0.62rem; letter-spacing: 0.25em;
+  text-transform: uppercase; padding: 0.55rem 1rem; cursor: pointer; }
+.stage-row button:hover { border-color: var(--violet); color: var(--lav-bright); }
+.stage-msg { font-size: 0.64rem; letter-spacing: 0.15em; margin-top: 0.5rem; min-height: 1em; }
+.stage-msg.bad { color: #e07a7a; }
+.stage-msg.good { color: var(--gold, #c9a227); color: var(--magenta); }
+#plock-readout { margin-top: 1rem; font-size: 0.7rem; letter-spacing: 0.1em; line-height: 1.9;
+  color: var(--lav); border-top: 1px solid var(--line); padding-top: 1rem; }
+#plock-modal[hidden] { display: none; }
+#plock-modal { position: fixed; inset: 0; z-index: 10; display: flex; align-items: center;
+  justify-content: center; background: rgba(10,7,20,0.92); padding: 1.5rem; }
+#plock-modal .inner { max-width: 34rem; text-align: center; padding: 3rem 2.5rem;
+  background: rgba(16,12,30,0.95); border: 1px solid var(--magenta);
+  box-shadow: 0 0 60px rgba(217,70,239,0.25); }
+#plock-modal h2 { font-size: 1rem; font-weight: 400; letter-spacing: 0.3em;
+  color: var(--lav-bright); line-height: 2; margin-bottom: 1.2rem; }
+#plock-modal p { font-size: 0.7rem; letter-spacing: 0.2em; color: var(--lav-faint);
+  text-transform: uppercase; }
+#volume:disabled { opacity: 0.35; cursor: not-allowed; }
   </style>
 </head>
 <body>
@@ -402,6 +446,75 @@ body.live .status { color: var(--magenta); }
       </p>
     </section>
 
+
+    <section class="parity" aria-label="White Hat Parity Lock">
+      <p class="plock-line"><span id="plock-status">volume is parity-locked</span>
+        <span class="sep2" aria-hidden="true">&middot;</span>
+        <button id="plock-open" type="button" class="linklike" aria-expanded="false">take the challenge</button>
+        <span class="sep2" aria-hidden="true">&middot;</span>
+        <button id="plock-concede" type="button" class="linklike">concede</button></p>
+      <div id="plock-panel" hidden>
+        <h2>White Hat Parity Lock</h2>
+        <p>Five stages, protocol to parity. Every rule is public and every answer is
+        derivable from what is printed here &mdash; nothing depends on obscurity, and
+        reading the source is a legitimate method. Two paths: <strong>solve all five
+        stages</strong> for verified clearance, or <strong>concede</strong> at any time
+        for immediate access without honors. Progress persists in this browser;
+        clearing site data restarts the sequence.</p>
+        <p><strong>Pre-registered success signal:</strong> a genuine five-stage
+        clearance &mdash; and only that &mdash; displays exactly:
+        <strong>&ldquo;WELCOME TO THE GOLD CIRCUIT. GOLD CIRCUIT, ONE TRUTH
+        STANDARD.&rdquo;</strong> Any victory screen with different wording is not
+        a victory.</p>
+        <div class="stage" data-stage="1">
+          <p><strong>Stage 1 &middot; Protocol.</strong> The carrier rides in this
+          page&rsquo;s head. Find the meta tag named <code>apex-s1</code>, decode its
+          payload, submit the access key.</p>
+          <div class="stage-row"><input type="text" aria-label="Stage 1 answer" maxlength="64"><button type="button">verify</button></div>
+          <p class="stage-msg" role="status"></p>
+        </div>
+        <div class="stage" data-stage="2" hidden>
+          <p><strong>Stage 2 &middot; Bitwise.</strong> Bytes:
+          <code>A7 3C 5B 91 E2 4F 08 D6</code>. Compute the XOR-fold of all eight bytes (one
+          byte), then the parity word: bit i is 1 if byte i has an odd popcount, first
+          byte = most significant bit. Submit fold then parity word as four uppercase
+          hex digits.</p>
+          <div class="stage-row"><input type="text" aria-label="Stage 2 answer" maxlength="8"><button type="button">verify</button></div>
+          <p class="stage-msg" role="status"></p>
+        </div>
+        <div class="stage" data-stage="3" hidden>
+          <p><strong>Stage 3 &middot; Keyed digest.</strong> Compute HMAC-SHA-256 with
+          key <code>APEX-S3-PUBLIC-KEY-2026</code> over the exact message
+          <code>the reference constant is 432</code>. Submit the first 16 hex characters, lowercase.</p>
+          <div class="stage-row"><input type="text" aria-label="Stage 3 answer" maxlength="32"><button type="button">verify</button></div>
+          <p class="stage-msg" role="status"></p>
+        </div>
+        <div class="stage" data-stage="4" hidden>
+          <p><strong>Stage 4 &middot; Error correction.</strong> Three Hamming(7,4)
+          codewords, bit order <code>p1 p2 d1 p3 d2 d3 d4</code> (positions 1&ndash;7),
+          each carrying exactly one flipped bit:
+          <code>0100011</code> <code>1100111</code>
+          <code>0010101</code>. For each word submit the error position
+          (1&ndash;7) then the corrected data nibble in uppercase hex &mdash; six
+          characters total.</p>
+          <div class="stage-row"><input type="text" aria-label="Stage 4 answer" maxlength="12"><button type="button">verify</button></div>
+          <p class="stage-msg" role="status"></p>
+        </div>
+        <div class="stage" data-stage="5" hidden>
+          <p><strong>Stage 5 &middot; Parity lock.</strong> A 4&times;4 grid of hex
+          nibbles. Every row XORs to 0, every column XORs to 0, the main diagonal XORs
+          to <code>5</code>. Rows: <code>[X1 3 2 5] &nbsp; [3 X2 2 0] &nbsp; [2 7 X3 4] &nbsp; [5 5 1 1]</code>. The
+          constraints admit exactly one solution. Submit X1 X2 X3 as three uppercase
+          hex digits.</p>
+          <div class="stage-row"><input type="text" aria-label="Stage 5 answer" maxlength="6"><button type="button">verify</button></div>
+          <p class="stage-msg" role="status"></p>
+        </div>
+        <div id="plock-readout" hidden>Nothing here was ever broken. The lock is the
+        test. Architecture intact, fingerprint-verified. Volume is yours &mdash;
+        without honors. The five stages remain open if you want them.</div>
+      </div>
+    </section>
+
     <section class="manifest" aria-label="ApexLayer manifest">
       <h1>Precision cybersecurity ARCHITECT.</h1>
       <p>
@@ -422,6 +535,14 @@ body.live .status { color: var(--magenta); }
       <p class="quiet"><a class="tx-link" href="/transmissions/">Receive the transmissions</a></p>
     </section>
   </main>
+
+  <div id="plock-modal" hidden role="dialog" aria-modal="true" aria-label="Gold Circuit clearance">
+    <div class="inner">
+      <h2>WELCOME TO THE GOLD CIRCUIT.<br>GOLD CIRCUIT, ONE TRUTH STANDARD.</h2>
+      <p>Verified five-stage clearance &middot; volume unlocked</p>
+      <p style="margin-top:1.4rem"><button id="plock-close" type="button" class="linklike">return to the field</button></p>
+    </div>
+  </div>
 
   <footer class="void-footer">
     <p>Find us in the void.</p>
@@ -586,6 +707,93 @@ body.live .status { color: var(--magenta); }
   } else {
     requestAnimationFrame(draw);
   }
+})();
+
+/* White Hat Parity Lock — isolated subsystem. Sole interface to the audio
+   engine: enabling the #volume input. Fixed listeners, no timers, no
+   accumulating state. Tri-state: locked -> conceded | locked -> cleared;
+   terminal states are absorbing (monotone upward, concede never downgrades
+   cleared, repeat actions are no-ops). */
+(() => {
+  'use strict';
+  const KEY = 'apex-plock';
+  const volume = document.getElementById('volume');
+  const statusLine = document.getElementById('plock-status');
+  const openBtn = document.getElementById('plock-open');
+  const concedeBtn = document.getElementById('plock-concede');
+  const panel = document.getElementById('plock-panel');
+  const readout = document.getElementById('plock-readout');
+  const modal = document.getElementById('plock-modal');
+  const closeBtn = document.getElementById('plock-close');
+  const stages = [...document.querySelectorAll('.stage')];
+
+  function load() {
+    try {
+      const s = JSON.parse(localStorage.getItem(KEY));
+      if (s && typeof s === 'object') return { path: s.path || null, stage: s.stage | 0, tokens: s.tokens || {} };
+    } catch (e) { /* fall through to fresh state */ }
+    return { path: null, stage: 0, tokens: {} };
+  }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* per-browser persistence only */ } }
+  let state = load();
+
+  function apply() {
+    const unlocked = state.path === 'conceded' || state.path === 'cleared';
+    volume.disabled = !unlocked;
+    volume.setAttribute('aria-disabled', String(!unlocked));
+    statusLine.textContent = state.path === 'cleared' ? 'volume unlocked \u00b7 gold circuit cleared'
+      : state.path === 'conceded' ? 'volume unlocked \u00b7 conceded'
+      : 'volume is parity-locked';
+    stages.forEach((el, i) => { el.hidden = i > state.stage; });
+    readout.hidden = state.path !== 'conceded';
+  }
+
+  openBtn.addEventListener('click', () => {
+    panel.hidden = !panel.hidden;
+    openBtn.setAttribute('aria-expanded', String(!panel.hidden));
+  });
+
+  concedeBtn.addEventListener('click', () => {
+    if (state.path === 'cleared') return;            // cleared is absorbing
+    state.path = 'conceded'; save();
+    panel.hidden = false; openBtn.setAttribute('aria-expanded', 'true');
+    apply();
+  });
+
+  closeBtn.addEventListener('click', () => { modal.hidden = true; });
+
+  stages.forEach((el) => {
+    const n = Number(el.dataset.stage);
+    const input = el.querySelector('input');
+    const btn = el.querySelector('button');
+    const msg = el.querySelector('.stage-msg');
+    btn.addEventListener('click', async () => {
+      msg.className = 'stage-msg'; msg.textContent = 'verifying\u2026';
+      try {
+        const r = await fetch('/api/verify', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ stage: n, answer: input.value, prev: state.tokens[n - 1] || '' }),
+        });
+        const d = await r.json();
+        if (r.status !== 200 || d.error) {
+          msg.className = 'stage-msg bad';
+          msg.textContent = 'validation channel offline \u2014 the concession path remains open';
+          return;
+        }
+        if (!d.ok) { msg.className = 'stage-msg bad'; msg.textContent = 'variance detected \u2014 not the answer'; return; }
+        state.tokens[n] = d.token;
+        state.stage = Math.max(state.stage, n);
+        if (d.cleared) { state.path = 'cleared'; save(); apply(); modal.hidden = false; }
+        else { save(); apply(); msg.className = 'stage-msg good'; msg.textContent = 'stage ' + n + ' verified \u2014 proceed'; }
+      } catch (e) {
+        msg.className = 'stage-msg bad';
+        msg.textContent = 'validation channel offline \u2014 the concession path remains open';
+      }
+    });
+  });
+
+  apply();
 })();
   </script>
 </body>
